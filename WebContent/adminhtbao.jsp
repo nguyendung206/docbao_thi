@@ -43,9 +43,10 @@
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminController">Trang chủ</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý bài báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?loai=1">Loại báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?tg=1">Tác giả</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?nd=1">Người đọc</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminthongkeController">Thống kê</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">

@@ -31,6 +31,14 @@
 	tacgiabo tgbo = new tacgiabo();
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+	ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ctbao");
+	ArrayList<chitietbaobean> mbsl = (ArrayList<chitietbaobean>)request.getAttribute("mbsl");
+	ArrayList<loaibean> loai = (ArrayList<loaibean>)request.getAttribute("dsloai");
+	ArrayList<loaibean> mlsl = (ArrayList<loaibean>) request.getAttribute("mlsl");
+	ArrayList<tacgiabean> tg = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
+	ArrayList<tacgiabean> mtgsl = (ArrayList<tacgiabean>)request.getAttribute("mtgsl");
+	ArrayList<nguoidocbean> nd = (ArrayList<nguoidocbean>)request.getAttribute("dsnguoidoc");
+	ArrayList<nguoidocbean> mndsl = (ArrayList<nguoidocbean>)request.getAttribute("mndsl");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -42,9 +50,10 @@
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminController">Trang chủ</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý bài báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?loai=1">Loại báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?tg=1">Tác giả</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?nd=1">Người đọc</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white" href="adminthongkeController">Thống kê</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
@@ -71,12 +80,6 @@
     	</div>
 	</nav>
 	<%
-		ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ctbao");
-		ArrayList<chitietbaobean> mbsl = (ArrayList<chitietbaobean>)request.getAttribute("mbsl");
-		ArrayList<loaibean> loai = (ArrayList<loaibean>)request.getAttribute("dsloai");
-		ArrayList<loaibean> mlsl = (ArrayList<loaibean>) request.getAttribute("mlsl");
-		ArrayList<tacgiabean> tg = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
-		ArrayList<tacgiabean> mtgsl = (ArrayList<tacgiabean>)request.getAttribute("mtgsl");
 		if(ds !=null) { 
 	%>
 			<div class="pt-4">
@@ -316,6 +319,76 @@
 			                                    <td>
 			                                        <a href="xoasuatgController?mtgsl=<%=t.getMatacgia()%>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-trash"></span><i class="fa-regular fa-pen-to-square"></i></a>
 			                                        <a href="xoasuatgController?mtg=<%=t.getMatacgia()%>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span><i class="fa-regular fa-trash-can"></i></a>
+			                                    </td>
+			                                </tr>
+			                            <%} %>
+			                        </tbody>
+			                    </table>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<% } else if(nd !=null) { %>
+	    	<div class="pt-4">
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+			                <h1>Quản lý người đọc</h1>
+			            </div>
+			            <div class="col-md-6 mx-auto d-block">
+			                <form action="xoasuandController" method="post">
+			                    <div class="form-group">
+		                            <label for="txtmand">Mã người đọc:</label>
+		                            <input name="txtmand" type="text" class="form-control mt-1" placeholder="Nhập mã người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getManguoidoc()%>" <%}} %>>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="txtht">Họ tên:</label>
+		                            <input name="txtht" type="text" class="form-control mt-1" placeholder="Nhập tên người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getHoten()%>" <%}} %>>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="txtemail">Email:</label>
+		                            <input name="txtemail" type="email" class="form-control mt-1" placeholder="Nhập email"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getEmail()%>" <%}} %>>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="txttk">Tài khoản:</label>
+		                            <input name="txttk" type="text" class="form-control mt-1" placeholder="Nhập tên đăng nhập"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getTaikhoan()%>" <%}} %>>
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="txtmk">Mật khẩu:</label>
+		                            <input name="txtmk" type="text" class="form-control mt-1" placeholder="Nhập mật khẩu"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getMatkhau()%>" <%}} %>>
+		                        </div>
+			                    <div class="text-center">
+			                        <button type="submit" name="them" value="1" class="btn btn-primary">Thêm</button>
+			                        <button type="submit" name="capnhat" value="1" class="btn btn-primary">Cập nhật</button>
+			                    </div>
+			                </form>
+			            </div>
+			            <div class="col-md-12 text-center">
+			                <h1 class="text-center">Danh sách người đọc</h1>
+			                <div class="table-responsive">
+			                    <table class="table table-bordered">
+			                        <thead>
+			                            <tr>
+			                                <th>Mã người đọc</th>
+			                                <th>Họ tên</th>
+			                                <th>Email</th>
+			                                <th>Tài khoản</th>
+			                                <th>Mật khẩu</th>
+			                                <th></th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <%for (nguoidocbean n : nd) { %>
+			                                <tr>
+			                                    <td><%=n.getManguoidoc() %></td>
+			                                    <td><%=n.getHoten() %></td>
+			                                    <td><%=n.getEmail() %></td>
+			                                    <td><%=n.getTaikhoan() %></td>
+			                                    <td><%=n.getMatkhau() %></td>
+			                                    <td>
+			                                        <a href="xoasuandController?mndsl=<%=n.getManguoidoc()%>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-trash"></span><i class="fa-regular fa-pen-to-square"></i></a>
+			                                        <a href="xoasuandController?mndx=<%=n.getManguoidoc()%>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span><i class="fa-regular fa-trash-can"></i></a>
 			                                    </td>
 			                                </tr>
 			                            <%} %>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.adminbean;
 import bo.chitietbaobo;
 import bo.loaibo;
+import bo.nguoidocbo;
 import bo.tacgiabo;
 
 /**
@@ -41,9 +42,11 @@ public class adminqlController extends HttpServlet {
 			chitietbaobo ctbbo = new chitietbaobo();
 			loaibo lbo = new loaibo();
 			tacgiabo tgbo = new tacgiabo();
+			nguoidocbo ndbo = new nguoidocbo();
 			String bao = request.getParameter("bao");
 			String loai = request.getParameter("loai");
 			String tg = request.getParameter("tg");
+			String nd = request.getParameter("nd");
 			adminbean  ad = (adminbean)session.getAttribute("dn");
 			if(ad==null)
 				response.sendRedirect("dangnhapController");
@@ -55,6 +58,9 @@ public class adminqlController extends HttpServlet {
 				request.setAttribute("dsloai", lbo.getloai());
 			} else if (tg != null) {
 				request.setAttribute("dstacgia", tgbo.gettacgia());
+			}
+			else if (nd != null) {
+				request.setAttribute("dsnguoidoc", ndbo.getnguoidoc());
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("quanly.jsp");
 			rd.forward(request, response);
