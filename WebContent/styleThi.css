@@ -8,13 +8,11 @@ body {
 	background: #2fa1b3;
 }
 
-.about {
-	border: 1px solid #e5efff;
-    border-radius: 8px;
+.nav-link {
+	font-size: 18px;
 }
 
 .about:hover {
-	border: 1px solid #ccc;
     transform: scale(1.025);
     transition: all 1s;
 }
@@ -73,6 +71,11 @@ div.content {
   height: 1000px;
 }
 
+.carousel {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
@@ -82,6 +85,18 @@ div.content {
   .sidebar a {float: left;}
   div.content {margin-left: 0;}
 }
+
+@media screen and (max-width: 480px) { 
+	.carousel {
+    max-width: 100%;
+    margin: 0 auto;
+	}
+	
+	.tacgia {
+		display: none;
+	}
+}
+
 
 @media screen and (max-width: 400px) {
   .sidebar a {

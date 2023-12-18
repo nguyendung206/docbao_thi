@@ -39,7 +39,7 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white" href="trangchuController">Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="trangchuController">Trang chủ</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="trangchuController" method="post">
 	                <div class="input-group">
@@ -56,40 +56,18 @@
 	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%=dn.getHoten()  %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn" style="background: tomato;">Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn">Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
     	</div>
 	</nav>
-	<!-- <div class="container">
-		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-			    <div class="carousel-item active">
-			      <img class="d-block w-100" src="./image_bao/1.jpg" alt="First slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block w-100" src="./image_bao/2.jpg" alt="Second slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block w-100" src="./image_bao/3.jpg" alt="Third slide">
-			    </div>
-		  	</div>
-			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			</a>
-	 		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-		  	</a>
-		</div>
-	</div> -->
-	<div class="pt-4">
+	
+	<div class="pt-2">
 		<div class="container-fluid">
 			<div class="row">
-		    	<div class="col-md-2 col-sm-3 col-12 pb-4">
+		    	<div class="col-md-2 col-sm-3 pb-4">
 		        	<div class="sidebar" style="width: 100%">
 		        		<h5 class="text-center pt-3">Thể loại</h5>
   						<ul class="list-unstyled">
@@ -107,14 +85,35 @@
 			        	</ul>
 					</div>
 		      	</div>
-				<div class="col-md-8 col-sm-6 col-12">
+				<div class="col-md-8 col-sm-6">
+					<div id="carouselExampleControls" class="carousel slide mb-4" data-ride="carousel">
+			            <div class="carousel-inner">
+			                <div class="carousel-item active">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/7.jpg" alt="...">
+			                </div>
+			                <div class="carousel-item">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/8.jpg" alt="...">
+			                </div>
+			                <div class="carousel-item">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/10.jpg" alt="...">
+			                </div>
+			            </div>
+			            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			                <span class="sr-only">Previous</span>
+			            </a>
+			            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			                <span class="sr-only">Next</span>
+			            </a>
+			        </div>
 					<div class="row">
 					<%
 					ArrayList<baobean> ds = (ArrayList<baobean>) request.getAttribute("dsbao");
 					if(ds !=null) {
 						for (baobean bao: ds) {
 					%>
-						<div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
+						<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 							<div class="about">
 								<img src="<%=bao.getAnhbia()%>" class="img-bao"><br>
 								<h6 style="text-align: justify; margin-top:16px"><%=bao.getTieude() %></h6>
@@ -128,7 +127,7 @@
 					<%} }%>
 					</div>
 				</div>
-				<div class="col-md-2 col-sm-3 pb-4 col-12">
+				<div class="col-md-2 col-sm-3 tacgia">
 		        	<div class="sidebar" style="width: 100%">
 		        		<h5 class="text-center pt-3">Tác giả</h5>
   						<ul class="list-unstyled">

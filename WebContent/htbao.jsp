@@ -70,7 +70,7 @@
 	<div class="pt-4">
 		<div class="container-fluid">
 			<div class="row">
-		    	<div class="col-md-2 col-sm-12 col-12 pb-4">
+		    	<div class="col-md-2 col-sm-12 pb-4">
 		        	<div class="sidebar" style="width: 100%">
 		        		<h5 class="text-center pt-3">Thể loại</h5>
   						<ul class="list-unstyled">
@@ -88,7 +88,7 @@
 			        	</ul>
 					</div>
 		      	</div>
-				<div class="col-md-8 col-sm-12 col-12">
+				<div class="col-md-8 col-sm-12">
 					<%
 					// Lấy về dssach
 					ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>) request.getAttribute("ctbao");
@@ -104,7 +104,7 @@
 					<%} 
 						} %>
 				</div>
-				<div class="col-md-2 col-sm-12 pb-4 col-12">
+				<div class="col-md-2 col-sm-12 pb-4 tacgia">
 		        	<div class="sidebar" style="width: 100%">
 		        		<h5 class="text-center pt-3">Tác giả</h5>
   						<ul class="list-unstyled">
