@@ -22,13 +22,53 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="styleThi.css">
 </head>
+<style>
+  .sidebar {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  /* Center-align the heading */
+  .sidebar h5 {
+    text-align: center;
+    color: #333;
+  }
+
+  /* Style the list items */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+
+  /* Add some styles to the links */
+  .sidebar a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  /* Change link color on hover */
+  .sidebar a:hover {
+    color: #0056b3;
+  }
+
+  /* Style the icon */
+  .sidebar i {
+    margin-right: 5px;
+  }
+</style>
 <body>
 	<%
 	loaibo lbo = new loaibo(); 
 	baobo bbo = new baobo();
 	tacgiabo tgbo = new tacgiabo();
-	request.setCharacterEncoding("utf-8");//gửi lên sever bằng mã utf-8
-	response.setCharacterEncoding("utf-8");//trả về client bằng mã utf-8
+	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -39,13 +79,15 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white btn" href="trangchuController">Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="trangchuController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="htDangbaoController"><i class="fa-solid fa-pen-to-square"></i> Đăng bài</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="lichsuController"><i class="fa-solid fa-clock-rotate-left"></i></i> Lịch sử đăng bài</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="trangchuController" method="post">
 	                <div class="input-group">
 	                    <input class="form-control" type="text" name="txttk" placeholder="Tìm kiếm" aria-label="Search">
 	                    <div class="input-group-append">
-	                        <button class="btn text-white" type="submit" style="border-color:white">Tìm</button>
+	                        <button class="btn text-white" type="submit" style="border-color:white"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
 	                    </div>
 	                </div>
 	            </form>
@@ -53,23 +95,22 @@
 	                <%
 	                  nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
 	                 if (dn != null) { %>
-	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%=dn.getHoten()  %></a></li>
-	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%=dn.getHoten()  %></a></li>
+	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn" style="background: tomato;">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn m-1" style="background: tomato;"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn m-1" style="background: green;"><i class="fa-solid fa-user-plus"></i> Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
     	</div>
 	</nav>
-	
 	<div class="pt-2">
 		<div class="container-fluid">
 			<div class="row">
 		    	<div class="col-md-2 col-sm-3 pb-4">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Thể loại</h5>
+		        		<h5 class="text-center pt-3">Thể loại:</h5>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
@@ -117,10 +158,10 @@
 							<div class="about">
 								<img src="<%=bao.getAnhbia()%>" class="img-bao"><br>
 								<h6 style="text-align: justify; margin-top:16px"><%=bao.getTieude() %></h6>
-								<span><%=bao.getNgayxuatbang() %></span>
+								<span><i class="fa-regular fa-clock"></i> : <%=bao.getNgayxuatbang() %></span>
 								<p><%=bao.getMota() %></p>
 								<div class="text-center pb-3">
-									<a href="htbaoController?mb=<%=bao.getMabao()%>" class="btn btn-success ">Đọc báo</a>
+									<a href="htbaoController?mb=<%=bao.getMabao()%>" class="btn btn-success "><i class="fa-solid fa-book-open-reader"></i> Đọc báo</a>
 								</div>
 							</div>
 						</div>
@@ -129,7 +170,7 @@
 				</div>
 				<div class="col-md-2 col-sm-3 tacgia">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Tác giả</h5>
+		        		<h5 class="text-center pt-3">Tác giả:</h5>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");

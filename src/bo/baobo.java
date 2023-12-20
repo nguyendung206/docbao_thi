@@ -56,4 +56,10 @@ public class baobo {
 	public int tongBao() throws Exception{
 		return bdao.tongBao();
 	}
+	public int Dangbao (String tieude, String noidung, String mota, String anhbia, long matacgia, Date ngayxuatban, String maloai) throws Exception{
+		return bdao.Dangbao(tieude, noidung, mota, anhbia, matacgia, ngayxuatban, maloai);
+	}
+	public ArrayList<baobean> getlichsu(long matg) throws Exception {
+		return bdao.getlichsu(matg);
+	}
 }

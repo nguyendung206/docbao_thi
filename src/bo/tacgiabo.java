@@ -28,4 +28,7 @@ public class tacgiabo {
 	public int tongTacgia() throws Exception{
 		return tgdao.tongTacgia();
 	}
+	public long Getmatg (String tentg) throws Exception{
+		return tgdao.Getmatg(tentg);
+	}
 }

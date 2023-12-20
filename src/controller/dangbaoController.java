@@ -5,32 +5,32 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import bean.nguoidocbean;
 import bo.baobo;
-import bo.chitietbaobo;
-
+import bo.tacgiabo;
 
 /**
- * Servlet implementation class xoasuabaoController
+ * Servlet implementation class dangbaoController
  */
-@WebServlet("/xoasuabaoController")
-public class xoasuabaoController extends HttpServlet {
+@WebServlet("/dangbaoController")
+public class dangbaoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public xoasuabaoController() {
+    public dangbaoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,32 +41,21 @@ public class xoasuabaoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
-			response.setCharacterEncoding("utf-8"); 
+			response.setCharacterEncoding("utf-8");
+            HttpSession session = request.getSession();
 			baobo bbo = new baobo();
-			chitietbaobo ctbbo = new chitietbaobo();
-			String mbx = request.getParameter("mb");
-			String mbsl = request.getParameter("mbsl");
+			tacgiabo tgbo = new tacgiabo();
+			nguoidocbean  nd= (nguoidocbean)session.getAttribute("dn");
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
 			String dirUrl1 = request.getServletContext().getRealPath("") +  File.separator + "image_bao";
 			response.getWriter().println(dirUrl1);
-			if (mbsl != null) {
-				request.setAttribute("mbsl", ctbbo.getctbao(Long.parseLong(mbsl)));
-				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?bao=1");
-                rd.forward(request, response);
-			}
-			if(mbx != null) {
-				bbo.Xoa(Long.parseLong(mbx));
-				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?bao=1");
-                rd.forward(request, response);
-			}
 			List<FileItem> fileItems = upload.parseRequest(request);
-			long mabao = 0;
 			String tieude = "";
             Date ngay = new Date();
             String maloai = "";
-            long matg = 0;
+            long matg = tgbo.Getmatg(nd.getHoten());
             String mota = "";  
             String noidung = "";
             String anhbia = "";
@@ -92,17 +81,11 @@ public class xoasuabaoController extends HttpServlet {
 					String fieldName = fileItem.getFieldName();
                     String fieldValue = fileItem.getString("utf-8");
                     switch (fieldName) {
-	                    case "txtmb":
-	                        mabao = Long.parseLong(fieldValue);
-	                        break;
                         case "txttieude":
                             tieude = fieldValue;
                             break;
                         case "txtml":
                             maloai = fieldValue;
-                            break;
-                        case "txtmtg":
-                            matg = Long.parseLong(fieldValue);
                             break;
                         case "txtmota":
                             mota = fieldValue;
@@ -111,12 +94,8 @@ public class xoasuabaoController extends HttpServlet {
                             noidung = fieldValue;
                             break;
                         case "them":
-                        	bbo.Them(tieude, noidung, mota, anhbia, matg, ngay, maloai);
-                        	response.sendRedirect("adminqlController?bao=1");
-                        	break;
-                        case "capnhat":
-                        	bbo.Capnhat(mabao, tieude, noidung, mota, anhbia, matg, ngay, maloai);
-                        	response.sendRedirect("adminqlController?bao=1");
+                        	bbo.Dangbao(tieude, noidung, mota, anhbia, matg, ngay, maloai);
+                        	response.sendRedirect("htDangbaoController");
                         	break;
                     }
 				}

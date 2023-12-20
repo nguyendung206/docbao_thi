@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.adminbean;
 import bean.baobean;
 import bo.baobo;
 import bo.loaibo;
@@ -39,7 +41,10 @@ public class adminController extends HttpServlet {
 			response.setCharacterEncoding("UTF-8"); 
 			loaibo lbo = new loaibo(); 
 			baobo bbo = new baobo();
-			tacgiabo tgbo = new tacgiabo();
+			tacgiabo tgbo = new tacgiabo();HttpSession session = request.getSession();
+			adminbean  nd= (adminbean)session.getAttribute("dn");
+			if(nd==null)
+				response.sendRedirect("dangnhapController");
 			request.setAttribute("dsloai", lbo.getloai());
 			request.setAttribute("dstacgia", tgbo.gettacgia());
 			String ml = request.getParameter("ml");

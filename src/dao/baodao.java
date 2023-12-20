@@ -13,7 +13,7 @@ public class baodao {
 		ArrayList<baobean> ds = new ArrayList<baobean>();
 		KetNoi1 kn = new KetNoi1();
 		kn.ketnoi();
-		String sql= "select * from bao";
+		String sql= "select * from bao where trangthai=1";
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		ResultSet rs = cmd.executeQuery();
 		while(rs.next()) {
@@ -25,7 +25,8 @@ public class baodao {
 			long matacgia = rs.getLong("matacgia");
 			Date ngayxuatban = rs.getDate("ngayxuatban");
 			String maloai = rs.getString("maloai");
-			ds.add(new baobean(mabao, tieude, noidung, mota, anhbia, matacgia, maloai, ngayxuatban));
+			Boolean trangthai =rs.getBoolean("trangthai");
+			ds.add(new baobean(mabao, tieude, noidung, mota, anhbia, matacgia, maloai, ngayxuatban, trangthai));
 		}
 		rs.close();
 		kn.cn.close();
@@ -34,8 +35,8 @@ public class baodao {
 	public int Them (String tieude, String noidung, String mota, String anhbia, long matacgia, Date ngayxuatban, String maloai) throws Exception{
 		KetNoi1 kn =new KetNoi1();
 		kn.ketnoi();
-		String sql= "INSERT INTO bao (tieude, noidung, mota, anhbia, matacgia, ngayxuatban, maloai)" + 
-				"VALUES (?,?,?,?,?,?,?);";
+		String sql= "INSERT INTO bao (tieude, noidung, mota, anhbia, matacgia, ngayxuatban, maloai, trangthai)" + 
+				"VALUES (?,?,?,?,?,?,?,1);";
 		PreparedStatement cmd =kn.cn.prepareStatement(sql);
 		cmd.setString(1, tieude);
 		cmd.setString(2, noidung);
@@ -112,7 +113,8 @@ public class baodao {
 			long matacgia = rs.getLong("matacgia");
 			Date ngayxuatban = rs.getDate("ngayxuatban");
 			String maloai = rs.getString("maloai");
-			ds.add(new baobean(mabao, tieude, noidung, mota, anhbia, matacgia, maloai, ngayxuatban));
+			Boolean trangthai =rs.getBoolean("trangthai");
+			ds.add(new baobean(mabao, tieude, noidung, mota, anhbia, matacgia, maloai, ngayxuatban, trangthai));
 		}
 		rs.close();
 		kn.cn.close();
@@ -131,5 +133,51 @@ public class baodao {
 		rs.close();
 		kn.cn.close();
 		return soluong;
+	}
+	public int Dangbao (String tieude, String noidung, String mota, String anhbia, long matacgia, Date ngayxuatban, String maloai) throws Exception{
+		KetNoi1 kn =new KetNoi1();
+		kn.ketnoi();
+		String sql= "INSERT INTO bao (tieude, noidung, mota, anhbia, matacgia, ngayxuatban, maloai, trangthai)" + 
+				"VALUES (?,?,?,?,?,?,?,0);";
+		PreparedStatement cmd =kn.cn.prepareStatement(sql);
+		cmd.setString(1, tieude);
+		cmd.setString(2, noidung);
+		cmd.setString(3, mota);
+		cmd.setString(4, anhbia);
+		cmd.setLong(5, matacgia);
+		Date n = new Date();
+		SimpleDateFormat dd= new SimpleDateFormat("yyyy-MM-dd");
+		String ngay = dd.format(n);
+		Date Ngayxuatban=dd.parse(ngay);
+		cmd.setDate(6, new java.sql.Date(Ngayxuatban.getTime()));
+		cmd.setString(7, maloai);
+		int kq=cmd.executeUpdate();
+		cmd.close();
+		kn.cn.close();
+		return kq;
+	}
+	public ArrayList<baobean> getlichsu(long matg) throws Exception {
+		ArrayList<baobean> ds = new ArrayList<baobean>();
+		KetNoi1 kn = new KetNoi1();
+		kn.ketnoi();
+		String sql= "select * from bao where matacgia = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setLong(1, matg);
+		ResultSet rs = cmd.executeQuery();
+		while(rs.next()) {
+			long mabao = rs.getLong("mabao");
+			String tieude = rs.getString("tieude");
+			String noidung = rs.getString("noidung");
+			String mota = rs.getString("mota");
+			String anhbia = rs.getString("anhbia");
+			long matacgia = rs.getLong("matacgia");
+			Date ngayxuatban = rs.getDate("ngayxuatban");
+			String maloai = rs.getString("maloai");
+			Boolean trangthai =rs.getBoolean("trangthai");
+			ds.add(new baobean(mabao, tieude, noidung, mota, anhbia, matacgia, maloai, ngayxuatban, trangthai));
+		}
+		rs.close();
+		kn.cn.close();
+		return ds;
 	}
 }

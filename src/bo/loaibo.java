@@ -28,4 +28,7 @@ public class loaibo {
 	public int tongLoai() throws Exception{
 		return ldao.tongLoai();
 	}
+	public String gettenloai(String maloai) throws Exception{
+		return ldao.gettenloai(maloai);
+	}
 }

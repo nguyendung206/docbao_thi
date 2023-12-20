@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,23 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import bean.adminbean;
-import bean.chitietbaobean;
-import bo.chitietbaobo;
+import bo.tacgiabo;
 
 /**
- * Servlet implementation class adminhtbaoController
+ * Servlet implementation class dkytgController
  */
-@WebServlet("/adminhtbaoController")
-public class adminhtbaoController extends HttpServlet {
+@WebServlet("/dkytgController")
+public class dkytgController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminhtbaoController() {
+    public dkytgController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +33,11 @@ public class adminhtbaoController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			chitietbaobo ctbbo = new chitietbaobo();
-			String mb = request.getParameter("mb");
-            HttpSession session = request.getSession();
-			adminbean  nd= (adminbean)session.getAttribute("dn");
-			if(nd==null)
-				response.sendRedirect("dangnhapController");
-			if (mb != null) {
-				ArrayList<chitietbaobean> ds = ctbbo.getctbao(Long.parseLong(mb));
-				request.setAttribute("ctbao", ds);
-			}
-			RequestDispatcher rd = request.getRequestDispatcher("adminhtbao.jsp");
-	        rd.forward(request, response);
+			tacgiabo tgbo = new tacgiabo();
+			String ttg = request.getParameter("txtttg");
+			tgbo.Them(ttg);
+			RequestDispatcher rd = request.getRequestDispatcher("htDangbaoController");
+		    rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

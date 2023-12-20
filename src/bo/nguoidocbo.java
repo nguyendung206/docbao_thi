@@ -3,7 +3,6 @@ package bo;
 import java.util.ArrayList;
 
 import bean.nguoidocbean;
-import bean.tacgiabean;
 import dao.nguoidocdao;
 
 public class nguoidocbo {

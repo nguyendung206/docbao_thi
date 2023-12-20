@@ -42,18 +42,18 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminController">Trang chủ</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý bài báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?loai=1">Loại báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?tg=1">Tác giả</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?nd=1">Người đọc</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminthongkeController">Thống kê</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
 	                    <input class="form-control" type="text" name="txttk" placeholder="Tìm kiếm" aria-label="Search">
 	                    <div class="input-group-append">
-	                        <button class="btn text-white" type="submit" style="border-color:white">Tìm</button>
+	                        <button class="btn text-white" type="submit" style="border-color:white"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
 	                    </div>
 	                </div>
 	            </form>
@@ -62,11 +62,11 @@
 	                  adminbean dn = (adminbean)session.getAttribute("dn");
 	                  if (dn != null) {
 	                %>
-	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%= dn.getTaikhoanadmin() %></a></li>
-	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
+	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn m-1" style="background: tomato;"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn m-1" style="background: green;"><i class="fa-solid fa-user-plus"></i> Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
@@ -102,11 +102,11 @@
 						for (chitietbaobean bao: ds) {
 					%>
 						<h1><%=bao.getTieude()%></h1> 
-						<span><%=bao.getTentacgia()%></span>
-						<span> <%=bao.getNgayxuatban()%></span> <br>
+						<span class="mr-1"><i class="fa-solid fa-user-pen"></i> : <%=bao.getTentacgia()%></span>
+						<span><i class="fa-regular fa-clock"></i> : <%=bao.getNgayxuatban()%></span> <br>
 						<h5><%=bao.getMota() %></h5> <br>
 						<img src="<%=bao.getAnhbia()%>" class="img-bao mx-auto d-block"><br>
-						<p><%=bao.getNoidung() %></p> 
+						<p style="font-size: 20px"><%=bao.getNoidung() %></p> 
 					<%} 
 						} %>
 				</div>

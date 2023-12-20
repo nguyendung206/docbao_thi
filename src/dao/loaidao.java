@@ -98,4 +98,18 @@ public class loaidao {
 		kn.cn.close();
 		return soluong;
 	}
+	public String gettenloai(String maloai) throws Exception{
+		KetNoi1 kn = new KetNoi1();
+		kn.ketnoi();
+		String tenloai = "";
+		String sql = "select tenloai from loai where maloai=?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		ResultSet rs = cmd.executeQuery();
+		while (rs.next()) {
+			tenloai = rs.getString("tenloai");
+		}
+		rs.close();
+		kn.cn.close();
+		return tenloai;
+	}
 }

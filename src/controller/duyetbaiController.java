@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.adminbean;
-import bean.chitietbaobean;
-import bo.chitietbaobo;
+import bo.baobo;
+import bo.duyetbaibo;
 
 /**
- * Servlet implementation class adminhtbaoController
+ * Servlet implementation class duyetbaiController
  */
-@WebServlet("/adminhtbaoController")
-public class adminhtbaoController extends HttpServlet {
+@WebServlet("/duyetbaiController")
+public class duyetbaiController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminhtbaoController() {
+    public duyetbaiController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +36,23 @@ public class adminhtbaoController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			chitietbaobo ctbbo = new chitietbaobo();
-			String mb = request.getParameter("mb");
-            HttpSession session = request.getSession();
+			duyetbaibo dbbo = new duyetbaibo();
+			baobo bbo = new baobo();
+			HttpSession session = request.getSession();
 			adminbean  nd= (adminbean)session.getAttribute("dn");
 			if(nd==null)
 				response.sendRedirect("dangnhapController");
-			if (mb != null) {
-				ArrayList<chitietbaobean> ds = ctbbo.getctbao(Long.parseLong(mb));
-				request.setAttribute("ctbao", ds);
+			String mabaoduyet = request.getParameter("mbd");
+			String mabaoxoa = request.getParameter("mbx");
+			if(mabaoduyet!=null) {
+				dbbo.Capnhat(Long.parseLong(mabaoduyet));
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("adminhtbao.jsp");
-	        rd.forward(request, response);
+			if(mabaoxoa!=null) {
+				bbo.Xoa(Long.parseLong(mabaoxoa));
+			}
+			request.setAttribute("ds", dbbo.getduyetbai());
+			RequestDispatcher rd = request.getRequestDispatcher("duyetbai.jsp");
+		    rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

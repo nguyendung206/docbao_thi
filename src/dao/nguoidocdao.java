@@ -4,9 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import bean.loaibean;
 import bean.nguoidocbean;
-import bean.tacgiabean;
 
 public class nguoidocdao {
 	public nguoidocbean ktdn (String tk, String mk) throws Exception{

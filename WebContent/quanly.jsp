@@ -49,18 +49,18 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminController">Trang chủ</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý bài báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?loai=1">Loại báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?tg=1">Tác giả</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?nd=1">Người đọc</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminthongkeController">Thống kê</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
 	                    <input class="form-control" type="text" name="txttk" placeholder="Tìm kiếm" aria-label="Search">
 	                    <div class="input-group-append">
-	                        <button class="btn text-white" type="submit" style="border-color:white">Tìm</button>
+	                        <button class="btn text-white" type="submit" style="border-color:white"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
 	                    </div>
 	                </div>
 	            </form>
@@ -69,11 +69,11 @@
 	                  adminbean dn = (adminbean)session.getAttribute("dn");
 	                  if (dn != null) {
 	                %>
-	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%= dn.getTaikhoanadmin() %></a></li>
-	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
+	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn m-1" style="background: tomato;"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn m-1" style="background: green;"><i class="fa-solid fa-user-plus"></i> Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
@@ -94,11 +94,11 @@
 								    <div class="form-group col-md-6 col-12 col-sm-12">
 										<div class="form-row">
 											<div class="form-group col-md-4 col-12 col-sm-12">
-											    <label for="inputState">Mã báo</label>
+											    <label for="inputState">Mã báo:</label>
 											    <input type="text" name="txtmb" class="form-control" id="inputAddress" placeholder="Mã báo" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getMabao()%>" <%}} %>>
 										    </div>
 										    <div class="form-group col-md-4 col-12 col-sm-12">
-											    <label for="inputState">Loại báo</label>
+											    <label for="inputState">Loại báo:</label>
 										    	<select id="inputState" class="form-control" name="txtml">
 											    	<% for (loaibean l : loai) { %>
 												            <option value="<%= l.getMaloai() %>" 
@@ -116,7 +116,7 @@
 										    	</select>
 										    </div>
 										    <div class="form-group col-md-4 col-12 col-sm-12">
-											    <label for="inputState">Tác giả</label>
+											    <label for="inputState">Tác giả:</label>
 											    <select id="inputState" class="form-control" name="txtmtg">
 											        <% for (tacgiabean t : tg) { %>
 											            <option value="<%= t.getMatacgia() %>" 
@@ -135,11 +135,11 @@
 											</div>
 										</div>
 								    	<div class="form-group">
-										    <label for="inputAddress">Tiêu đề</label>
+										    <label for="inputAddress">Tiêu đề:</label>
 										    <input type="text" name="txttieude" class="form-control" id="inputAddress" placeholder="Tiêu đề" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getTieude()%>" <%}} %>>
 									  	</div>
 									    <div class="form-group">
-										    <label for="inputEmail4">Ảnh bìa</label>
+										    <label for="inputEmail4">Ảnh bìa:</label>
 										    <input type="file" name="txtanhbia" class="form-control" id="inputEmail4" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getAnhbia()%>" <%}} %>>
 									    </div>
 									  	<div class="form-group">
@@ -167,8 +167,8 @@
 								    </div>
 								</div>
 						  		<div class="text-center">
-						  			<button type="submit" name="them" value="1" class="btn btn-primary">Thêm</button>
-						  			<button type="submit" name="capnhat" value="1" class="btn btn-primary">Cập nhật</button>
+						  			<button type="submit" name="them" value="1" class="btn-lg btn btn-primary">Thêm</button>
+						  			<button type="submit" name="capnhat" value="1" class="btn-lg btn btn-primary">Cập nhật</button>
 						  		</div>
 							</form>
 						</div>
@@ -186,9 +186,9 @@
 				                                <th>Mã báo</th>
 				                                <th>Thể loại</th>
 				                                <th>Tiêu đề</th>
-				                                <th>Mô tả</th>
-				                                <th style="max-width: 600px">Nội dung</th>
-				                                <th>Ảnh bìa</th>
+				                                <th style="min-width: 150px;">Mô tả</th>
+				                                <th style="min-width: 500px;">Nội dung</th>
+				                                <th style="min-width: 250px;">Ảnh bìa</th>
 				                                <th>Ngày xuất bản</th>
 				                                <th>Tên tác giả</th>
 				                                <th style="min-width: 91px"></th>
@@ -204,7 +204,7 @@
 				                                <td><%=bao.getTieude() %></td>
 				                                <td><%=bao.getMota() %></td>
 				                                <td><%=bao.getNoidung() %></td>
-				                                <td><%=bao.getAnhbia() %></td>
+				                                <td><img alt="" src="<%=bao.getAnhbia() %>" style="width:100%;"></td>
 				                                <td><%=bao.getNgayxuatban() %></td>
 				                                <td><%=bao.getTentacgia() %></td>
 				                                <td>

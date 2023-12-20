@@ -96,4 +96,19 @@ public class tacgiadao {
 		kn.cn.close();
 		return soluong;
 	}
+	public long Getmatg(String tentg) throws Exception{
+		KetNoi1 kn = new KetNoi1();
+		kn.ketnoi();
+		long matg = 0;
+		String sql = "select matacgia from tacgia where tentacgia = ?";
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setString(1, tentg);
+		ResultSet rs = cmd.executeQuery();
+		while (rs.next()) {
+			matg = rs.getInt("matacgia");
+		}
+		rs.close();
+		kn.cn.close();
+		return matg;
+	}
 }
