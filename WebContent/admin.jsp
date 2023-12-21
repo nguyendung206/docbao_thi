@@ -27,6 +27,7 @@
 	loaibo lbo = new loaibo(); 
 	baobo bbo = new baobo();
 	tacgiabo tgbo = new tacgiabo();
+    adminbean dn = (adminbean)session.getAttribute("dn");
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
 	%>
@@ -39,12 +40,16 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
+	            	<% if (dn != null) { %>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="duyetbaiController"><i class="fa-solid fa-check"></i> Duyệt bài</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
+	            	<%} else { %>
+	            	<li class="nav-item active"><a class="nav-link text-white btn" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<%} %>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
@@ -55,10 +60,7 @@
 	                </div>
 	            </form>
 	            <ul class="navbar-nav ">
-	                <%
-	                  adminbean dn = (adminbean)session.getAttribute("dn");
-	                  if (dn != null) {
-	                %>
+	                <% if (dn != null) { %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
@@ -69,12 +71,12 @@
         	</div>
     	</div>
 	</nav>
-	<div class="pt-4">
+	<div style="padding-top:100px">
 		<div class="container-fluid">
 			<div class="row">
-		    	<div class="col-md-2 col-sm-3 col-12 pb-4">
+		    	<div class="col-md-2 col-sm-3 pb-4">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Thể loại:</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">THỂ LOẠI</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
@@ -90,17 +92,17 @@
 			        	</ul>
 					</div>
 		      	</div>
-				<div class="col-md-8 col-sm-6 col-12">
+				<div class="col-md-8 col-sm-6">
 					<div id="carouselExampleControls" class="carousel slide mb-4" data-ride="carousel">
 			            <div class="carousel-inner">
 			                <div class="carousel-item active">
-			                    <img class="d-block w-100 carousel-img" src="./image_bao/7.jpg" alt="...">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/24.jpg" alt="...">
 			                </div>
 			                <div class="carousel-item">
-			                    <img class="d-block w-100 carousel-img" src="./image_bao/8.jpg" alt="...">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/27.jpg" alt="...">
 			                </div>
 			                <div class="carousel-item">
-			                    <img class="d-block w-100 carousel-img" src="./image_bao/10.jpg" alt="...">
+			                    <img class="d-block w-100 carousel-img" src="./image_bao/29.jpg" alt="...">
 			                </div>
 			            </div>
 			            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -118,24 +120,23 @@
 					if(ds !=null) {
 						for (baobean bao: ds) {
 					%>
-						<div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
+						<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 							<div class="about">
 								<img src="<%=bao.getAnhbia()%>" class="img-bao"><br>
 								<h6 style="text-align: justify; margin-top:16px"><%=bao.getTieude() %></h6>
-								<span><%=bao.getNgayxuatbang() %></span>
+								<span><i class="fa-regular fa-clock"></i> : <%=bao.getNgayxuatbang() %></span>
 								<p><%=bao.getMota() %></p>
 								<div class="text-center pb-3">
-									<a href="adminhtbaoController?mb=<%=bao.getMabao()%>" class="btn btn-success ">Đọc báo</a>
+									<a href="adminhtbaoController?mb=<%=bao.getMabao()%>" class="btn btn-success "><i class="fa-solid fa-book-open-reader"></i> Đọc báo</a>
 								</div>
 							</div>
 						</div>
-					<%} 
-						} %>
+					<%} }%>
 					</div>
 				</div>
-				<div class="col-md-2 col-sm-3 col-12 pb-4">
+				<div class="col-md-2 col-sm-3 tacgia">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Tác giả:</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">TÁC GIẢ</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");

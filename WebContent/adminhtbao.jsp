@@ -72,20 +72,19 @@
         	</div>
     	</div>
 	</nav>
-	
 	<div class="pt-4">
 		<div class="container-fluid">
 			<div class="row">
-		    	<div class="col-md-2 col-sm-12 col-12 pb-4">
+		    	<div class="col-md-2 col-sm-3 pb-4">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Thể loại</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">THỂ LOẠI</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
 				         	for(loaibean l: lbo.getloai()) {
 				          %>
 			          		<li>
-			          			<a href="adminController?ml=<%= l.getMaloai() %>"> 
+			          			<a href="trangchuController?ml=<%= l.getMaloai() %>"> 
 				          			<i class="fa-solid fa-tags"></i>
 				          			<%= l.getTenloai() %>
 			          			</a>
@@ -96,7 +95,6 @@
 		      	</div>
 				<div class="col-md-8 col-sm-12 col-12">
 					<%
-					// Lấy về dssach
 					ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>) request.getAttribute("ctbao");
 					if(ds !=null) {
 						for (chitietbaobean bao: ds) {
@@ -106,20 +104,20 @@
 						<span><i class="fa-regular fa-clock"></i> : <%=bao.getNgayxuatban()%></span> <br>
 						<h5><%=bao.getMota() %></h5> <br>
 						<img src="<%=bao.getAnhbia()%>" class="img-bao mx-auto d-block"><br>
-						<p style="font-size: 20px"><%=bao.getNoidung() %></p> 
+						<p style="font-size: 18px"><%=bao.getNoidung() %></p> 
 					<%} 
 						} %>
 				</div>
-				<div class="col-md-2 col-sm-12 pb-4 col-12">
+				<div class="col-md-2 col-sm-3 tacgia">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Tác giả</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">TÁC GIẢ</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
 				         	for(tacgiabean tg: tgbo.gettacgia()) {
 				          %>
 			          		<li>
-				          		<a href="adminController?mtg=<%= tg.getMatacgia() %>"> 
+				          		<a href="trangchuController?mtg=<%= tg.getMatacgia() %>"> 
 				          			<i class="fa-solid fa-user-pen"></i>
 				          			<%= tg.getTentacgia() %> 
 				          		</a>

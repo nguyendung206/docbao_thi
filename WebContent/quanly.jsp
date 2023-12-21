@@ -31,6 +31,7 @@
 	tacgiabo tgbo = new tacgiabo();
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+	adminbean dn = (adminbean)session.getAttribute("dn");
 	ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ctbao");
 	ArrayList<chitietbaobean> mbsl = (ArrayList<chitietbaobean>)request.getAttribute("mbsl");
 	ArrayList<loaibean> loai = (ArrayList<loaibean>)request.getAttribute("dsloai");
@@ -49,12 +50,16 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<% if (dn != null) { %>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="duyetbaiController"><i class="fa-solid fa-check"></i> Duyệt bài</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
+	            	<%} else { %>
+	            	<li class="nav-item active"><a class="nav-link text-white btn" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<%} %>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
@@ -65,10 +70,7 @@
 	                </div>
 	            </form>
 	            <ul class="navbar-nav ">
-	                <%
-	                  adminbean dn = (adminbean)session.getAttribute("dn");
-	                  if (dn != null) {
-	                %>
+	                <% if (dn != null) { %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
@@ -191,7 +193,7 @@
 				                                <th style="min-width: 250px;">Ảnh bìa</th>
 				                                <th>Ngày xuất bản</th>
 				                                <th>Tên tác giả</th>
-				                                <th style="min-width: 91px"></th>
+				                                <th style="min-width: 91px">Sửa/Xóa</th>
 				                            </tr>
 				                        </thead>
 				                        <tbody>
@@ -246,7 +248,7 @@
 			                    </div>
 			                </form>
 			            </div>
-			            <div class="col-md-12 text-center">
+			            <div class="col-md-12 text-center pt-4">
 			                <h1 class="text-center">Danh sách loại báo</h1>
 			                <div class="table-responsive">
 			                    <table class="table table-bordered">
@@ -254,7 +256,7 @@
 			                            <tr>
 			                                <th>Mã loại báo</th>
 			                                <th>Tên loại báo</th>
-			                                <th></th>
+			                                <th>Sửa/Xóa</th>
 			                            </tr>
 			                        </thead>
 			                        <tbody>
@@ -300,7 +302,7 @@
 			                    </div>
 			                </form>
 			            </div>
-			            <div class="col-md-12 text-center">
+			            <div class="col-md-12 text-center pt-4">
 			                <h1 class="text-center">Danh sách tác giả</h1>
 			                <div class="table-responsive">
 			                    <table class="table table-bordered">
@@ -308,7 +310,7 @@
 			                            <tr>
 			                                <th>Mã tác giả</th>
 			                                <th>Tên tác giả</th>
-			                                <th></th>
+			                                <th>Sửa/Xóa</th>
 			                            </tr>
 			                        </thead>
 			                        <tbody>
@@ -364,7 +366,7 @@
 			                    </div>
 			                </form>
 			            </div>
-			            <div class="col-md-12 text-center">
+			            <div class="col-md-12 text-center pt-4">
 			                <h1 class="text-center">Danh sách người đọc</h1>
 			                <div class="table-responsive">
 			                    <table class="table table-bordered">
@@ -375,7 +377,7 @@
 			                                <th>Email</th>
 			                                <th>Tài khoản</th>
 			                                <th>Mật khẩu</th>
-			                                <th></th>
+			                                <th>Sửa/Xóa</th>
 			                            </tr>
 			                        </thead>
 			                        <tbody>

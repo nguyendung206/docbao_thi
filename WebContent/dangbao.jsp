@@ -19,6 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="styleThi.css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -77,12 +78,13 @@
                         <label for="inputPassword4">Tên tác giả:</label>
                         <input type="text" name="txtttg" class="form-control" id="inputPassword4" placeholder="Tên tác giả" required>
                     </div>
+                    <p class="font-weight-bold text-danger">* Bạn phải đăng ký tác giả trước khi đăng muốn đăng bài! Nếu bạn đã đăng ký rồi thì bỏ qua bước này!</p>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        <button type="submit" class="btn-lg btn-success btn btn-primary">Đăng ký</button>
                     </div>
                </form>
             </div>
-			<div class="col-md-12 col-sm-12 col-12 text-center">
+			<div class="col-md-12 text-center pt-4">
 				<h1>Đăng bài</h1>
 			</div>
 			<div class="col-md-12 col-sm-12 col-12">
@@ -115,16 +117,20 @@
 					    <div class="form-group col-md-6 col-12 col-sm-12">
 					    	<div class="form-group">
 							    <label for="comment">Nội dung:</label>
-   								<textarea required class="form-control" rows="5" id="comment" name="txtnd" style="min-height: 391px"></textarea>
+   								<textarea id="editor" name="txtnoidung" cols="20" rows="20"></textarea>
 							</div>
 					    </div>
 					</div>
 			  		<div class="text-center">
-			  			<button type="submit" name="them" value="1" class="btn-lg btn btn-primary">Đăng</button>
+			  			<button type="submit" name="them" value="1" class="btn-lg btn-success btn btn-primary">Đăng</button>
 			  		</div>
 				</form>
 			</div>
 		</div>
 	</div>
+<script>
+	CKEDITOR.replace( 'editor' );
+</script> 
 </body>
+
 </html>

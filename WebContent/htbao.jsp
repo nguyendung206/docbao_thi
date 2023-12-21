@@ -27,6 +27,7 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
 		loaibo lbo = new loaibo(); 
 		baobo bbo = new baobo();
 		chitietbaobo ctbbo = new chitietbaobo();
@@ -41,38 +42,38 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white" href="trangchuController">Trang chủ</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="trangchuController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	                <% if (dn != null) { %>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="htDangbaoController"><i class="fa-solid fa-pen-to-square"></i> Đăng bài</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn" href="lichsuController"><i class="fa-solid fa-clock-rotate-left"></i></i> Lịch sử đăng bài</a></li>
+	            	<%} %>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="trangchuController" method="post">
 	                <div class="input-group">
 	                    <input class="form-control" type="text" name="txttk" placeholder="Tìm kiếm" aria-label="Search">
 	                    <div class="input-group-append">
-	                        <button class="btn text-white" type="submit" style="border-color:white">Tìm</button>
+	                        <button class="btn text-white" type="submit" style="border-color:white"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
 	                    </div>
 	                </div>
 	            </form>
 	            <ul class="navbar-nav ">
-	                <%
-	                  nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
-	                  if (dn != null) {
-	                %>
-	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%= dn.getHoten() %></a></li>
-	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+	                <% if (dn != null) { %>
+	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%=dn.getHoten()  %></a></li>
+	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn m-1" style="background: tomato;"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn m-1" style="background: green;"><i class="fa-solid fa-user-plus"></i> Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
     	</div>
 	</nav>
-	
 	<div class="pt-4">
 		<div class="container-fluid">
 			<div class="row">
-		    	<div class="col-md-2 col-sm-12 pb-4">
+		    	<div class="col-md-2 col-sm-3 pb-4">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Thể loại</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">THỂ LOẠI</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
@@ -88,25 +89,24 @@
 			        	</ul>
 					</div>
 		      	</div>
-				<div class="col-md-8 col-sm-12">
+				<div class="col-md-8 col-sm-12 col-12">
 					<%
-					// Lấy về dssach
 					ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>) request.getAttribute("ctbao");
 					if(ds !=null) {
 						for (chitietbaobean bao: ds) {
 					%>
 						<h1><%=bao.getTieude()%></h1> 
-						<span><%=bao.getTentacgia()%></span>
-						<span> <%=bao.getNgayxuatban()%></span> <br>
+						<span class="mr-1"><i class="fa-solid fa-user-pen"></i> : <%=bao.getTentacgia()%></span>
+						<span><i class="fa-regular fa-clock"></i> : <%=bao.getNgayxuatban()%></span> <br>
 						<h5><%=bao.getMota() %></h5> <br>
 						<img src="<%=bao.getAnhbia()%>" class="img-bao mx-auto d-block"><br>
-						<p><%=bao.getNoidung() %></p> 
+						<p style="font-size: 18px"><%=bao.getNoidung() %></p> 
 					<%} 
 						} %>
 				</div>
-				<div class="col-md-2 col-sm-12 pb-4 tacgia">
+				<div class="col-md-2 col-sm-3 tacgia">
 		        	<div class="sidebar" style="width: 100%">
-		        		<h5 class="text-center pt-3">Tác giả</h5>
+		        		<h4 class="text-center pt-3" style="color:red;">TÁC GIẢ</h4>
   						<ul class="list-unstyled">
 				         <%
 				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");

@@ -38,6 +38,7 @@
 	tacgiabo tgbo = new tacgiabo();
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+	adminbean dn = (adminbean)session.getAttribute("dn");
 	int tongBao = (int)request.getAttribute("tongBao");
 	int tongLoai = (int)request.getAttribute("tongLoai");
 	int tongNguoidoc = (int)request.getAttribute("tongNguoidoc");
@@ -52,31 +53,32 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminController">Trang chủ</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?bao=1">Quản lý bài báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?loai=1">Loại báo</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?tg=1">Tác giả</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminqlController?nd=1">Người đọc</a></li>
-	                <li class="nav-item active"><a class="nav-link text-white" href="adminthongkeController">Thống kê</a></li>
+	            	<% if (dn != null) { %>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="duyetbaiController"><i class="fa-solid fa-check"></i> Duyệt bài</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
+	            	<%} else { %>
+	            	<li class="nav-item active"><a class="nav-link text-white btn" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<%} %>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
 	                    <input class="form-control" type="text" name="txttk" placeholder="Tìm kiếm" aria-label="Search">
 	                    <div class="input-group-append">
-	                        <button class="btn text-white" type="submit" style="border-color:white">Tìm</button>
+	                        <button class="btn text-white" type="submit" style="border-color:white"><i class="fa-solid fa-magnifying-glass"></i> Tìm</button>
 	                    </div>
 	                </div>
 	            </form>
 	            <ul class="navbar-nav ">
-	                <%
-	                  adminbean dn = (adminbean)session.getAttribute("dn");
-	                  if (dn != null) {
-	                %>
-	                <li class="nav-item "><a class="nav-link text-white" href="#">Xin chào <%= dn.getTaikhoanadmin() %></a></li>
-	                <li class="nav-item"><a class="nav-link text-white" href="dangxuatController"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
+	                <% if (dn != null) { %>
+	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
+	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
-	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white">Đăng nhập</a></li>
-	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white">Đăng Ký</a></li>
+	                <li class="nav-item"><a href="dangnhapController" class="nav-link text-white btn m-1" style="background: tomato;"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a></li>
+	                <li class="nav-item"><a href="dangkyController" class="nav-link text-white btn m-1" style="background: green;"><i class="fa-solid fa-user-plus"></i> Đăng Ký</a></li>
 	                <% }; %>
 	            </ul>
         	</div>
@@ -141,33 +143,32 @@
 	                <div class="pt-4 col-md-12 text-center">
 	                    <h1 class="col-md-12">Thống kê</h1>
 	                    <div class="container pt-4">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <form class="form-inline" action="adminthongkeController" method="post">
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="txtngay" class="mr-2">Chọn ngày:</label>
-                    <input class="form-control" type="date" name="txtngay" id="txtngay">
-                </div>
-                <button type="submit" name="tk" value="1" class="btn btn-sm btn-primary mb-2">Thống kê</button>
-                <button type="submit" name="all" value="1" class="btn btn-sm btn-primary mb-2">Hiển thị tất cả</button>
-            </form>
-        </div>
-    </div>
-</div>
-
+						    <div class="row">
+						        <div class="col-md-4 text-center">
+						            <form action="adminthongkeController" method="post">
+						                <div class="form-group mb-2">
+						                    <label for="txtngay" class="mr-2">Chọn ngày:</label>
+						                    <input class="form-control" type="date" name="txtngay" id="txtngay">
+						                </div>
+						                <button type="submit" name="tk" value="1" class="btn btn-primary mb-2 mr-sm-2">Thống kê</button>
+						                <button type="submit" name="all" value="1" class="btn btn-primary mb-2">Hiển thị tất cả</button>
+						            </form>
+						        </div>
+						    </div>
+						</div>
 	                    <div class="table-responsive">
 	                        <%
 	                            ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ds");
 	                            if(ds != null && !ds.isEmpty()) { 
 	                        %>
-	                        <table class="table table-bordered">
+	                        <table class="table table-bordered" style="text-align: justify;">
 	                            <thead>
 	                                <tr class="text-center">
 	                                    <th>Tiêu đề</th>
 	                                    <th>Thể loại</th>
-	                                    <th>Mô tả</th>
-	                                    <th style="max-width: 600px">Nội dung</th>
-	                                    <th>Ảnh bìa</th>
+	                                    <th style="min-width: 150px;">Mô tả</th>
+		                                <th style="min-width: 500px;">Nội dung</th>
+		                                <th style="min-width: 250px;">Ảnh bìa</th>
 	                                    <th>Ngày xuất bản</th>
 	                                    <th>Tên tác giả</th>
 	                                </tr>
@@ -181,7 +182,7 @@
 	                                    <td><%=bao.getTenloai() %></td>
 	                                    <td><%=bao.getMota() %></td>
 	                                    <td><%=bao.getNoidung() %></td>
-	                                    <td><%=bao.getAnhbia() %></td>
+	                                    <td><img alt="" src="<%=bao.getAnhbia() %>" style="width:100%;"></td>
 	                                    <td><%=bao.getNgayxuatban() %></td>
 	                                    <td><%=bao.getTentacgia() %></td>
 	                                </tr>

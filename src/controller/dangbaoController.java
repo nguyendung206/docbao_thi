@@ -90,7 +90,7 @@ public class dangbaoController extends HttpServlet {
                         case "txtmota":
                             mota = fieldValue;
                             break;
-                        case "txtnd":
+                        case "txtnoidung":
                             noidung = fieldValue;
                             break;
                         case "them":

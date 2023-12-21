@@ -3,6 +3,16 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 }
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-toggler-icon {
+ 	background-color: #fff;
+}
 
 .header {
 	background: #2fa1b3;
@@ -32,48 +42,65 @@ body {
 }
 
 .sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  height: 100%;
-  overflow: auto;
+	margin: 0;
+	width: 200px;
+	height: 100%;
+	overflow: auto;
+	background-color: #f4f4f4;
+	padding: 15px;
+	border-radius: 10px;
 }
 
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+}
+
+.sidebar li {
+	margin-bottom: 10px;
+}
+
+.sidebar i {
+	margin-right: 5px;
+}
 .sidebar a:hover {
 	background-color: #2fa1b3 !important;
+	color: #0056b3;
 }
 
 p {
 	text-align: justify;
 }
+
 .sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
+	display: block;
+	padding: 16px;
+	text-decoration: none;
+	color: #007bff;
+	font-weight: 500;
 }
  
 .sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
+	background-color: #04AA6D;
+	color: white;
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+	background-color: #555;
+	color: white;
 }
 
 
 div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
+	margin-left: 200px;
+	padding: 1px 16px;
+	height: 1000px;
 }
 
 .carousel {
     max-width: 75%;
     margin: 0 auto;
+    border-radius: 8px;
 }
 
 @media screen and (max-width: 700px) {
