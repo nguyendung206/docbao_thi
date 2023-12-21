@@ -22,6 +22,12 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 <title>Insert title here</title>
 </head>
+<style>
+ #cke_1_contents {
+    height: 255px !important;
+}
+
+</style>
 <body>
 	<%
 	loaibo lbo = new loaibo(); 

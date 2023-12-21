@@ -32,6 +32,7 @@
 		baobo bbo = new baobo();
 		chitietbaobo ctbbo = new chitietbaobo();
 		tacgiabo tgbo = new tacgiabo();
+		adminbean dn = (adminbean)session.getAttribute("dn");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -42,12 +43,16 @@
 	        </button>
 	        <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 18px">
 	            <ul class="navbar-nav mr-auto">
-	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<% if (dn != null) { %>
+	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="duyetbaiController"><i class="fa-solid fa-check"></i> Duyệt bài</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?bao=1"><i class="fa-regular fa-newspaper"></i> Bài báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?loai=1"><i class="fa-solid fa-tags"></i> Loại báo</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?tg=1"><i class="fa-solid fa-user-pen"></i> Tác giả</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminqlController?nd=1"><i class="fa-solid fa-user"></i> Người đọc</a></li>
 	                <li class="nav-item active"><a class="nav-link text-white btn m-1" href="adminthongkeController"><i class="fa-solid fa-chart-column"></i> Thống kê</a></li>
+	            	<%} else { %>
+	            	<li class="nav-item active"><a class="nav-link text-white btn" href="adminController"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+	            	<%} %>
 	            </ul>
 	            <form class="form-inline my-2 my-lg-0 mx-auto" action="adminController" method="post">
 	                <div class="input-group">
@@ -58,10 +63,7 @@
 	                </div>
 	            </form>
 	            <ul class="navbar-nav ">
-	                <%
-	                  adminbean dn = (adminbean)session.getAttribute("dn");
-	                  if (dn != null) {
-	                %>
+	                <% if (dn != null) { %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
 	                <% } else { %>
@@ -72,7 +74,7 @@
         	</div>
     	</div>
 	</nav>
-	<div class="pt-4">
+	<div style="padding-top:100px;">
 		<div class="container-fluid">
 			<div class="row">
 		    	<div class="col-md-2 col-sm-3 pb-4">
@@ -84,7 +86,7 @@
 				         	for(loaibean l: lbo.getloai()) {
 				          %>
 			          		<li>
-			          			<a href="trangchuController?ml=<%= l.getMaloai() %>"> 
+			          			<a href="adminController?ml=<%= l.getMaloai() %>"> 
 				          			<i class="fa-solid fa-tags"></i>
 				          			<%= l.getTenloai() %>
 			          			</a>
@@ -117,7 +119,7 @@
 				         	for(tacgiabean tg: tgbo.gettacgia()) {
 				          %>
 			          		<li>
-				          		<a href="trangchuController?mtg=<%= tg.getMatacgia() %>"> 
+				          		<a href="adminController?mtg=<%= tg.getMatacgia() %>"> 
 				          			<i class="fa-solid fa-user-pen"></i>
 				          			<%= tg.getTentacgia() %> 
 				          		</a>

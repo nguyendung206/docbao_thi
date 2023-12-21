@@ -86,7 +86,7 @@
 	</nav>
 	<div id="layoutSidenav_content">
 	    <main>
-	        <div class="container-fluid px-4">
+	        <div class="container-fluid" style="padding-top:70px;">
 	            <h2 class="mt-4">Tổng quát</h2>
 	            <div class="row">
 	                <div class="col-md-6">

@@ -3,6 +3,11 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 }
+
+#cke_1_contents {
+    height: 255px !important;
+}
+
 .navbar {
     position: fixed;
     width: 100%;

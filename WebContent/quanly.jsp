@@ -22,7 +22,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
   <link rel="stylesheet" href="styleThi.css">
+  
 </head>
 <body>
 	<%
@@ -84,7 +86,7 @@
 	<%
 		if(ds !=null) { 
 	%>
-			<div class="pt-4">
+			<div style="padding-top:100px;">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-12 text-center">
@@ -161,9 +163,9 @@
 										    <%if (mbsl != null) {
 		      										for (chitietbaobean c : mbsl) {
 		      								%>
-		      								<textarea class="form-control" rows="5" id="comment" name="txtnd" style="min-height: 391px"><%=c.getNoidung() %></textarea>
+		      								<textarea class="form-control" rows="5" id="editor" name="txtnd" style="min-height: 391px"><%=c.getNoidung() %></textarea>
 		      								<%}} else {  %>
-		      								<textarea class="form-control" rows="5" id="comment" name="txtnd" style="min-height: 391px"></textarea>
+		      								<textarea id="editor" name="txtnd" cols="20" rows="20"></textarea>
 											<%} %>
 										</div>
 								    </div>
@@ -224,7 +226,7 @@
 				</div>
 			</div>
 	<%} else if(loai !=null) { %>
-			<div class="pt-4">
+			<div style="padding-top:100px;">
 			    <div class="container">
 			        <div class="row">
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
@@ -278,7 +280,7 @@
 			    </div>
 			</div>
     <% } else if(tg !=null) { %>
-	    	<div class="pt-4">
+	    	<div style="padding-top:100px;">
 			    <div class="container">
 			        <div class="row">
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
@@ -332,7 +334,7 @@
 			    </div>
 			</div>
 			<% } else if(nd !=null) { %>
-	    	<div class="pt-4">
+	    	<div style="padding-top:100px;">
 			    <div class="container">
 			        <div class="row">
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
@@ -404,5 +406,8 @@
     <%} else { %>
     	<p>Không có dữ liệu</p>
     <%} %>
+<script>
+	CKEDITOR.replace( 'editor' );
+</script> 
 </body>
 </html>

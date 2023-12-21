@@ -64,7 +64,7 @@
         	</div>
     	</div>
 	</nav>
-	<div class="container-fluid pt-4">
+	<div class="container-fluid" style="padding-top:100px;">
 	    <div class="row">
 	        <div class="col-md-12 col-sm-12 col-12 text-center">
 	            <h1 class="text-center">Danh sách bài báo chờ duyệt</h1>
