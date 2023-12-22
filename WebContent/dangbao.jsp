@@ -73,7 +73,7 @@
         	</div>
     	</div>
 	</nav>
-	<div class="container py-4">
+	<div class="container pb-4" style="padding-top: 100px;">
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-sm-12 text-center">
                <h1>Đăng ký tác giả</h1>

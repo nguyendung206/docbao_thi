@@ -68,7 +68,7 @@
         	</div>
     	</div>
 	</nav>
-	<div class="pt-4">
+	<div style="padding-top: 100px">
 		<div class="container-fluid">
 			<div class="row">
 		    	<div class="col-md-2 col-sm-3 pb-4">

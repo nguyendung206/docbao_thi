@@ -62,7 +62,7 @@ public class xoasuabaoController extends HttpServlet {
                 rd.forward(request, response);
 			}
 			List<FileItem> fileItems = upload.parseRequest(request);
-			long mabao = 0;
+			String mabao = "";
 			String tieude = "";
             Date ngay = new Date();
             String maloai = "";
@@ -93,7 +93,7 @@ public class xoasuabaoController extends HttpServlet {
                     String fieldValue = fileItem.getString("utf-8");
                     switch (fieldName) {
 	                    case "txtmb":
-	                        mabao = Long.parseLong(fieldValue);
+	                        mabao = fieldValue;
 	                        break;
                         case "txttieude":
                             tieude = fieldValue;
@@ -115,7 +115,7 @@ public class xoasuabaoController extends HttpServlet {
                         	response.sendRedirect("adminqlController?bao=1");
                         	break;
                         case "capnhat":
-                        	bbo.Capnhat(mabao, tieude, noidung, mota, anhbia, matg, ngay, maloai);
+                        	bbo.Capnhat(Long.parseLong(mabao), tieude, noidung, mota, anhbia, matg, ngay, maloai);
                         	response.sendRedirect("adminqlController?bao=1");
                         	break;
                     }

@@ -170,6 +170,7 @@
 										</div>
 								    </div>
 								</div>
+								<p class="font-weight-bold text-danger">* Thêm báo không cần nhập mã báo</p>
 						  		<div class="text-center">
 						  			<button type="submit" name="them" value="1" class="btn-lg btn btn-primary">Thêm</button>
 						  			<button type="submit" name="capnhat" value="1" class="btn-lg btn btn-primary">Cập nhật</button>
@@ -298,6 +299,7 @@
 			                            <input type="text" name="txtttg" class="form-control" id="inputPassword4" placeholder="Tên tác giả" <%if(mtgsl!=null){for(tacgiabean t: mtgsl) { %> value="<%= t.getTentacgia() %>" <%}} %>>
 			                        </div>
 			                    </div>
+			                    <p class="font-weight-bold text-danger">* Thêm tác giả không cần nhập mã tác giả</p>
 			                    <div class="text-center">
 			                        <button type="submit" name="them" value="1" class="btn btn-primary">Thêm</button>
 			                        <button type="submit" name="capnhat" value="1" class="btn btn-primary">Cập nhật</button>
@@ -344,7 +346,7 @@
 			                <form action="xoasuandController" method="post">
 			                    <div class="form-group">
 		                            <label for="txtmand">Mã người đọc:</label>
-		                            <input name="txtmand" type="text" class="form-control mt-1" placeholder="Nhập mã người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getManguoidoc()%>" <%}} %>>
+		                            <input name="txtmnd" type="text" class="form-control mt-1" placeholder="Nhập mã người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getManguoidoc()%>" <%}} %>>
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="txtht">Họ tên:</label>
@@ -362,6 +364,7 @@
 		                            <label for="txtmk">Mật khẩu:</label>
 		                            <input name="txtmk" type="text" class="form-control mt-1" placeholder="Nhập mật khẩu"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getMatkhau()%>" <%}} %>>
 		                        </div>
+		                        <p class="font-weight-bold text-danger">* Thêm người đọc không cần nhập mã người đọc</p>
 			                    <div class="text-center">
 			                        <button type="submit" name="them" value="1" class="btn btn-primary">Thêm</button>
 			                        <button type="submit" name="capnhat" value="1" class="btn btn-primary">Cập nhật</button>
@@ -378,7 +381,7 @@
 			                                <th>Họ tên</th>
 			                                <th>Email</th>
 			                                <th>Tài khoản</th>
-			                                <th>Mật khẩu</th>
+			                                <th>Mật khẩu đã được mã hóa</th>
 			                                <th>Sửa/Xóa</th>
 			                            </tr>
 			                        </thead>

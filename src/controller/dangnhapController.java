@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.adminbean;
 import bean.nguoidocbean;
 import bo.adminbo;
+import bo.mahoabo;
 import bo.nguoidocbo;
 import nl.captcha.Captcha;
 
@@ -46,7 +47,8 @@ public class dangnhapController extends HttpServlet {
 		     if (tk != null && mk != null ) {
 		         nguoidocbo ndbo = new nguoidocbo();
 		         adminbo adbo = new adminbo();
-		         nguoidocbean nd = ndbo.ktdn(tk, mk);
+		         mahoabo mhbo = new mahoabo();
+		         nguoidocbean nd = ndbo.ktdn(tk, mhbo.ecrypt(mk));
 		         adminbean ad = adbo.ktdn(tk, mk);
 		         if (ad != null && captcha.isCorrect(captchaAnswer)) {
 		             session.setAttribute("dn", ad);

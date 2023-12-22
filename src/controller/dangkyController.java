@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.mahoabo;
 import bo.nguoidocbo;
 
 
@@ -36,6 +37,7 @@ public class dangkyController extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 				response.setCharacterEncoding("UTF-8"); 
 		        HttpSession session = request.getSession();
+		        mahoabo mhbo = new mahoabo();
 				String hoten = request.getParameter("txtht");
 			    String email = request.getParameter("txtemail");
 				String un = request.getParameter("txtun");
@@ -44,7 +46,7 @@ public class dangkyController extends HttpServlet {
 			    if (hoten != null && un != null && pass != null) {
 			    	nguoidocbo ndbo = new nguoidocbo();
 			        if (!ndbo.checkTaikhoan(un)) {
-			        	ndbo.dangky(hoten, email, un, pass);
+			        	ndbo.dangky(hoten, email, un, mhbo.ecrypt(pass));
 			            session.removeAttribute("tbdn");
 			            RequestDispatcher rd = request.getRequestDispatcher("dangnhap.jsp");
 			            rd.forward(request, response);

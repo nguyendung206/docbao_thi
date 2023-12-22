@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.mahoabo;
 import bo.nguoidocbo;
 
 /**
@@ -34,6 +35,7 @@ public class xoasuandController extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8"); 
 			nguoidocbo ndbo = new nguoidocbo();
+			mahoabo mhbo = new mahoabo();
 			String mndx = request.getParameter("mndx");
 			String sl = request.getParameter("mndsl");
 			String mnd = request.getParameter("txtmnd");
@@ -47,9 +49,9 @@ public class xoasuandController extends HttpServlet {
 				request.setAttribute("mndsl", ndbo.Select(Long.parseLong(sl)));
 			}
 			if (them != null) {
-				ndbo.Them(ht,email,tk,mk);
+				ndbo.Them(ht,email,tk,mhbo.ecrypt(mk));
 			} else if (capnhat != null) {
-				ndbo.Capnhat(Long.parseLong(mnd), ht,email,tk,mk);
+				ndbo.Capnhat(Long.parseLong(mnd), ht,email,tk, mhbo.ecrypt(mk));
 			} else if(mndx!=null) {
 				ndbo.Xoa(Long.parseLong(mndx));
 			}
