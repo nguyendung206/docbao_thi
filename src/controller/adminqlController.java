@@ -47,19 +47,51 @@ public class adminqlController extends HttpServlet {
 			String loai = request.getParameter("loai");
 			String tg = request.getParameter("tg");
 			String nd = request.getParameter("nd");
+			String tb1 = request.getParameter("tb1");
+			String tb2 = request.getParameter("tb2");
+			String tb3 = request.getParameter("tb3");
+			String tb4 = request.getParameter("tb4");
 			adminbean  ad = (adminbean)session.getAttribute("dn");
 			if(ad==null)
 				response.sendRedirect("dangnhapController");
 			if (bao != null) {
+				if (tb1!=null)
+					request.setAttribute("tb1", "1");
+				else if (tb2!=null)
+					request.setAttribute("tb2", "1");
+				else if (tb3!=null)
+					request.setAttribute("tb3", "1");
 				request.setAttribute("ctbao", ctbbo.getallctbao());
 				request.setAttribute("dsloai", lbo.getloai());
 				request.setAttribute("dstacgia", tgbo.gettacgia());
 			} else if (loai != null) {
+				if (tb1!=null)
+					request.setAttribute("tb1", "1");
+				else if (tb2!=null)
+					request.setAttribute("tb2", "1");
+				else if (tb3!=null)
+					request.setAttribute("tb3", "1");
+				else if (tb4!=null)
+					request.setAttribute("tb4", "1");
 				request.setAttribute("dsloai", lbo.getloai());
 			} else if (tg != null) {
+				if (tb1!=null)
+					request.setAttribute("tb1", "1");
+				else if (tb2!=null)
+					request.setAttribute("tb2", "1");
+				else if (tb3!=null)
+					request.setAttribute("tb3", "1");
 				request.setAttribute("dstacgia", tgbo.gettacgia());
 			}
 			else if (nd != null) {
+				if (tb1!=null)
+					request.setAttribute("tb1", "1");
+				else if (tb2!=null)
+					request.setAttribute("tb2", "1");
+				else if (tb3!=null)
+					request.setAttribute("tb3", "1");
+				else if (tb4!=null)
+					request.setAttribute("tb4", "1");
 				request.setAttribute("dsnguoidoc", ndbo.getnguoidoc());
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("quanly.jsp");

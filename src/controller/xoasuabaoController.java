@@ -58,7 +58,7 @@ public class xoasuabaoController extends HttpServlet {
 			}
 			if(mbx != null) {
 				bbo.Xoa(Long.parseLong(mbx));
-				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?bao=1");
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?bao=1&tb3=1");
                 rd.forward(request, response);
 			}
 			List<FileItem> fileItems = upload.parseRequest(request);
@@ -112,11 +112,11 @@ public class xoasuabaoController extends HttpServlet {
                             break;
                         case "them":
                         	bbo.Them(tieude, noidung, mota, anhbia, matg, ngay, maloai);
-                        	response.sendRedirect("adminqlController?bao=1");
+                        	response.sendRedirect("adminqlController?bao=1&tb1=1");
                         	break;
                         case "capnhat":
                         	bbo.Capnhat(Long.parseLong(mabao), tieude, noidung, mota, anhbia, matg, ngay, maloai);
-                        	response.sendRedirect("adminqlController?bao=1");
+                        	response.sendRedirect("adminqlController?bao=1&tb2=1");
                         	break;
                     }
 				}

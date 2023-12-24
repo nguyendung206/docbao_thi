@@ -40,10 +40,14 @@ public class htDangbaoController extends HttpServlet {
 			loaibo lbo = new loaibo();
 			tacgiabo tgbo = new tacgiabo();
             nguoidocbean  nd= (nguoidocbean)session.getAttribute("dn");
+            String tb = request.getParameter("tb");
 			if(nd==null)
 				response.sendRedirect("dangnhapController");
 			request.setAttribute("dsloai", lbo.getloai());
 			request.setAttribute("dstacgia", tgbo.gettacgia());
+			if (tb!=null) {
+				request.setAttribute("tbdb", "1");
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("dangbao.jsp");
 		    rd.forward(request, response);
 		} catch (Exception e) {

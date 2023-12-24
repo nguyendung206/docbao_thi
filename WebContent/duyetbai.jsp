@@ -21,9 +21,10 @@
 </head>
 <body>
 	<%
-	ArrayList<duyetbaibean> ds = (ArrayList<duyetbaibean>)request.getAttribute("ds");
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+	ArrayList<duyetbaibean> ds = (ArrayList<duyetbaibean>)request.getAttribute("ds");
+    adminbean dn = (adminbean)session.getAttribute("dn");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -51,7 +52,6 @@
 	            </form>
 	            <ul class="navbar-nav ">
 	                <%
-	                  adminbean dn = (adminbean)session.getAttribute("dn");
 	                  if (dn != null) {
 	                %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%= dn.getTaikhoanadmin() %></a></li>
@@ -69,6 +69,7 @@
 	        <div class="col-md-12 col-sm-12 col-12 text-center">
 	            <h1 class="text-center">Danh sách bài báo chờ duyệt</h1>
 	            <div class="col-md-12 col-sm-12 col-12 text-center">
+	            <%if (ds != null && !ds.isEmpty()) { %>
 	                <div class="table-responsive">
 	                    <table class="table table-bordered" style="min-width: 500px; text-align: justify;">
 	                        <thead>
@@ -107,6 +108,11 @@
 	                        </tbody>
 	                    </table>
 	                </div>
+	            <%} else { %>
+	            	<div class="col-md-12">
+	            		<p class="text-center" style="font-size: 20px;">Chưa có bài viết nào!</p>
+	            	</div>
+	            <%} %>	
 	            </div>
 	        </div>
 	    </div>

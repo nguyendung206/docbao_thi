@@ -35,8 +35,11 @@
 	tacgiabo tgbo = new tacgiabo();
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+    nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
 	ArrayList<loaibean> loai = (ArrayList<loaibean>)request.getAttribute("dsloai");
 	ArrayList<tacgiabean> tg = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
+	String tb2 = (String)request.getAttribute("tbdb");
+	String tb1 = (String)request.getAttribute("tb");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -61,7 +64,6 @@
 	            </form>
 	            <ul class="navbar-nav ">
 	                <%
-	                  nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
 	                 if (dn != null) { %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%=dn.getHoten()  %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
@@ -85,14 +87,32 @@
                         <input type="text" name="txtttg" class="form-control" id="inputPassword4" placeholder="Tên tác giả" required>
                     </div>
                     <p class="font-weight-bold text-danger">* Bạn phải đăng ký tác giả trước khi đăng muốn đăng bài! Nếu bạn đã đăng ký rồi thì bỏ qua bước này!</p>
+
                     <div class="text-center">
                         <button type="submit" class="btn-lg btn-success btn btn-primary">Đăng ký</button>
                     </div>
+                    
                </form>
+               <%
+                	if (tb1 != null) {
+               %>
+	               <div class="alert alert-success mt-2">
+				   		<strong>Đăng ký thành công!</strong> Vui lòng điền thông tin vào form bên dưới để đăng bài.
+				   </div>
+			   <%} %>
             </div>
 			<div class="col-md-12 text-center pt-4">
 				<h1>Đăng bài</h1>
 			</div>
+			<%
+               	if (tb2 != null) {
+            %>
+              		<div class="col-md-12 text-center">
+		               <div class="alert alert-success mt-2">
+					   		<strong>Bài đăng đã được gửi lên hệ thống!</strong> Vui lòng chờ duyệt bài.
+					   </div>
+				   </div>
+		   <%} %>
 			<div class="col-md-12 col-sm-12 col-12">
 				<form action="dangbaoController" method="post" enctype= "multipart/form-data">
 					<div class="form-row">

@@ -33,6 +33,9 @@
 		chitietbaobo ctbbo = new chitietbaobo();
 		tacgiabo tgbo = new tacgiabo();
 		adminbean dn = (adminbean)session.getAttribute("dn");
+     	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
+		ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>) request.getAttribute("ctbao");
+     	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -82,7 +85,6 @@
 		        		<h4 class="text-center pt-3" style="color:red;">THỂ LOẠI</h4>
   						<ul class="list-unstyled">
 				         <%
-				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
 				         	for(loaibean l: lbo.getloai()) {
 				          %>
 			          		<li>
@@ -97,7 +99,6 @@
 		      	</div>
 				<div class="col-md-8 col-sm-12 col-12">
 					<%
-					ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>) request.getAttribute("ctbao");
 					if(ds !=null) {
 						for (chitietbaobean bao: ds) {
 					%>
@@ -115,7 +116,6 @@
 		        		<h4 class="text-center pt-3" style="color:red;">TÁC GIẢ</h4>
   						<ul class="list-unstyled">
 				         <%
-				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
 				         	for(tacgiabean tg: tgbo.gettacgia()) {
 				          %>
 			          		<li>

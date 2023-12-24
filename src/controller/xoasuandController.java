@@ -49,11 +49,22 @@ public class xoasuandController extends HttpServlet {
 				request.setAttribute("mndsl", ndbo.Select(Long.parseLong(sl)));
 			}
 			if (them != null) {
-				ndbo.Them(ht,email,tk,mhbo.ecrypt(mk));
+				if (!ndbo.checkTaikhoan(tk)) {
+					ndbo.Them(ht,email,tk,mhbo.ecrypt(mk));
+					RequestDispatcher rd = request.getRequestDispatcher("adminqlController?nd=1&tb1=1");
+				    rd.forward(request, response);
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("adminqlController?nd=1&tb4=1");
+				    rd.forward(request, response);
+				}
 			} else if (capnhat != null) {
 				ndbo.Capnhat(Long.parseLong(mnd), ht,email,tk, mhbo.ecrypt(mk));
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?nd=1&tb2=1");
+			    rd.forward(request, response);
 			} else if(mndx!=null) {
 				ndbo.Xoa(Long.parseLong(mndx));
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?nd=1&tb3=1");
+			    rd.forward(request, response);
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("adminqlController?nd=1");
 		    rd.forward(request, response);

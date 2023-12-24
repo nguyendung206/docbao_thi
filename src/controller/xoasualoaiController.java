@@ -46,11 +46,20 @@ public class xoasualoaiController extends HttpServlet {
 			if (them != null) {
 				if (!lbo.checkMaloai(ml)) {
 					lbo.Them(ml, tl);
+					RequestDispatcher rd = request.getRequestDispatcher("adminqlController?loai=1&tb1=1");
+				    rd.forward(request, response);
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("adminqlController?loai=1&tb4=1");
+				    rd.forward(request, response);
 				}
 			} else if (capnhat != null) {
 				lbo.Capnhat(ml, tl);
-			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?loai=1&tb2=1");
+			    rd.forward(request, response);
+			} else if (mlx!=null) {
 				lbo.Xoa(mlx);
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?loai=1&tb3=1");
+			    rd.forward(request, response);
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("adminqlController?loai=1");
 		    rd.forward(request, response);

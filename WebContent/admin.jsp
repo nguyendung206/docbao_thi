@@ -24,12 +24,15 @@
 </head>
 <body>
 	<%
+	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
 	loaibo lbo = new loaibo(); 
 	baobo bbo = new baobo();
 	tacgiabo tgbo = new tacgiabo();
     adminbean dn = (adminbean)session.getAttribute("dn");
-	request.setCharacterEncoding("utf-8");
-	response.setCharacterEncoding("utf-8");
+ 	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
+	ArrayList<baobean> ds = (ArrayList<baobean>) request.getAttribute("dsbao");
+ 	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -79,7 +82,6 @@
 		        		<h4 class="text-center pt-3" style="color:red;">THỂ LOẠI</h4>
   						<ul class="list-unstyled">
 				         <%
-				         	ArrayList<loaibean> dsloai = (ArrayList<loaibean>)request.getAttribute("dsloai");
 				         	for(loaibean l: lbo.getloai()) {
 				          %>
 			          		<li>
@@ -116,7 +118,6 @@
 			        </div>
 					<div class="row">
 					<%
-					ArrayList<baobean> ds = (ArrayList<baobean>) request.getAttribute("dsbao");
 					if(ds !=null) {
 						for (baobean bao: ds) {
 					%>
@@ -139,7 +140,6 @@
 		        		<h4 class="text-center pt-3" style="color:red;">TÁC GIẢ</h4>
   						<ul class="list-unstyled">
 				         <%
-				         	ArrayList<tacgiabean> dstacgia = (ArrayList<tacgiabean>)request.getAttribute("dstacgia");
 				         	for(tacgiabean tg: tgbo.gettacgia()) {
 				          %>
 			          		<li>

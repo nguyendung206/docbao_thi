@@ -44,13 +44,17 @@ public class xoasuatgController extends HttpServlet {
 				request.setAttribute("mtgsl", tgbo.Selecttg(Long.parseLong(sl)));
 			}
 			if (them != null) {
-				if (!tgbo.checkMatg(Long.parseLong(mtg))) {
-					tgbo.Them(ttg);
-				}
+				tgbo.Them(ttg);
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?tg=1&tb1=1");
+			    rd.forward(request, response);
 			} else if (capnhat != null) {
 				tgbo.Capnhat(Long.parseLong(mtg), ttg);
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?tg=1&tb2=1");
+			    rd.forward(request, response);
 			} else if(mtgx!=null) {
 				tgbo.Xoa(Long.parseLong(mtgx));
+				RequestDispatcher rd = request.getRequestDispatcher("adminqlController?tg=1&tb3=1");
+			    rd.forward(request, response);
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("adminqlController?tg=1");
 		    rd.forward(request, response);

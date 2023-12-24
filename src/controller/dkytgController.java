@@ -36,6 +36,7 @@ public class dkytgController extends HttpServlet {
 			tacgiabo tgbo = new tacgiabo();
 			String ttg = request.getParameter("txtttg");
 			tgbo.Them(ttg);
+			request.setAttribute("tb", "1");
 			RequestDispatcher rd = request.getRequestDispatcher("htDangbaoController");
 		    rd.forward(request, response);
 		} catch (Exception e) {

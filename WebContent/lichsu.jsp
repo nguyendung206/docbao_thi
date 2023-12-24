@@ -21,9 +21,10 @@
 </head>
 <body>
 	<%
-	ArrayList<baobean> ds = (ArrayList<baobean>)request.getAttribute("ls");
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
+    nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
+	ArrayList<baobean> ds = (ArrayList<baobean>)request.getAttribute("ls");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -48,7 +49,6 @@
 	            </form>
 	            <ul class="navbar-nav ">
 	                <%
-	                  nguoidocbean dn = (nguoidocbean)session.getAttribute("dn");
 	                 if (dn != null) { %>
 	                <li class="nav-item "><a class="nav-link text-white btn m-1" href="#"><i class="fa-solid fa-user"></i> Xin chào: <%=dn.getHoten()  %></a></li>
 	                <li class="nav-item"><a class="nav-link text-white btn m-1" href="dangxuatController" style="background: #e74c3c;"><span class="glyphicon glyphicon-log-out"></span><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>

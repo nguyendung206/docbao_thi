@@ -42,6 +42,10 @@
 	ArrayList<tacgiabean> mtgsl = (ArrayList<tacgiabean>)request.getAttribute("mtgsl");
 	ArrayList<nguoidocbean> nd = (ArrayList<nguoidocbean>)request.getAttribute("dsnguoidoc");
 	ArrayList<nguoidocbean> mndsl = (ArrayList<nguoidocbean>)request.getAttribute("mndsl");
+	String tb1 = (String)request.getAttribute("tb1");
+	String tb2 = (String)request.getAttribute("tb2");
+	String tb3 = (String)request.getAttribute("tb3");
+	String tb4 = (String)request.getAttribute("tb4");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -92,6 +96,27 @@
 						<div class="col-md-12 col-sm-12 col-12 text-center">
 							<h1>Quản lý báo</h1>
 						</div>
+						<%
+			               	if (tb1 != null) {
+			            %>
+			              		<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Thêm bài viết thành công!</strong>
+								   </div>
+							    </div>
+					   <%}else if (tb2 != null) { %>
+					   			<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Bài viết đã được sửa!</strong>
+								   </div>
+							    </div>
+						<%}else if (tb3 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Xóa bài viết thành công!</strong>.
+								   </div>
+							    </div>
+						<%} %>
 						<div class="col-md-12 col-sm-12 col-12">
 							<form action="xoasuabaoController" method="post" enctype= "multipart/form-data">
 								<div class="form-row">
@@ -140,20 +165,20 @@
 										</div>
 								    	<div class="form-group">
 										    <label for="inputAddress">Tiêu đề:</label>
-										    <input type="text" name="txttieude" class="form-control" id="inputAddress" placeholder="Tiêu đề" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getTieude()%>" <%}} %>>
+										    <input type="text" name="txttieude" required class="form-control" id="inputAddress" placeholder="Tiêu đề" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getTieude()%>" <%}} %>>
 									  	</div>
 									    <div class="form-group">
 										    <label for="inputEmail4">Ảnh bìa:</label>
-										    <input type="file" name="txtanhbia" class="form-control" id="inputEmail4" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getAnhbia()%>" <%}} %>>
+										    <input type="file" name="txtanhbia" required class="form-control" id="inputEmail4" <%if (mbsl != null) {for (chitietbaobean c : mbsl) { %> value="<%=c.getAnhbia()%>" <%}} %>>
 									    </div>
 									  	<div class="form-group">
 										    <label for="comment">Mô tả:</label>
 		      								<%if (mbsl != null) {
 		      										for (chitietbaobean c : mbsl) {
 		      								%>
-		      								<textarea class="form-control" rows="5" id="comment" name="txtmota"><%=c.getMota() %></textarea>
+		      								<textarea class="form-control" required rows="5" id="comment" name="txtmota"><%=c.getMota() %></textarea>
 		      								<%}} else {  %>
-		      								<textarea class="form-control" rows="5" id="comment" name="txtmota"></textarea>
+		      								<textarea class="form-control" required rows="5" id="comment" name="txtmota"></textarea>
 											<%} %>
 										</div>
 								    </div>
@@ -163,9 +188,9 @@
 										    <%if (mbsl != null) {
 		      										for (chitietbaobean c : mbsl) {
 		      								%>
-		      								<textarea class="form-control" rows="5" id="editor" name="txtnd" style="min-height: 391px"><%=c.getNoidung() %></textarea>
+		      								<textarea class="form-control" required cols="20" rows="20" id="editor" name="txtnd" style="min-height: 391px"><%=c.getNoidung() %></textarea>
 		      								<%}} else {  %>
-		      								<textarea id="editor" name="txtnd" cols="20" rows="20"></textarea>
+		      								<textarea id="editor" name="txtnd" required cols="20" rows="20"></textarea>
 											<%} %>
 										</div>
 								    </div>
@@ -233,16 +258,43 @@
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
 			                <h1>Quản lý loại</h1>
 			            </div>
+			            <%
+			               	if (tb1 != null) {
+			            %>
+			              		<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Thêm thể loại thành công!</strong>
+								   </div>
+							    </div>
+					   <%}else if (tb2 != null) { %>
+					   			<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Tên thể loại đã được sửa!</strong>
+								   </div>
+							    </div>
+						<%}else if (tb3 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Xóa thể loại thành công!</strong>.
+								   </div>
+							    </div>
+						<%}else if (tb4 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-danger mt-2">
+								   		<strong>Mã thể loại đã tồn lại!</strong>.
+								   </div>
+							    </div>
+						<%} %>
 			            <div class="col-md-6 mx-auto d-block">
 			                <form action="xoasualoaiController" method="post">
 			                    <div class="form-row">
 			                        <div class="form-group col-md-6">
 			                            <label for="inputEmail4">Mã loại</label>
-			                            <input type="text" name="txtml" class="form-control" id="inputEmail4" placeholder="Mã loại" <%if (mlsl!=null) {for(loaibean l: mlsl){ %>value="<%=l.getMaloai() %> <%}}%>">
+			                            <input type="text" name="txtml" required class="form-control" id="inputEmail4" placeholder="Mã loại" <%if (mlsl!=null) {for(loaibean l: mlsl){ %>value="<%=l.getMaloai() %> <%}}%>">
 			                        </div>
 			                        <div class="form-group col-md-6">
 			                            <label for="inputPassword4">Tên loại</label>
-			                            <input type="text" name="txttl" class="form-control" id="inputPassword4" placeholder="Tên loại" <%if (mlsl!=null) {for(loaibean l: mlsl){ %>value="<%=l.getTenloai() %> <%}}%>">
+			                            <input type="text" required name="txttl" class="form-control" id="inputPassword4" placeholder="Tên loại" <%if (mlsl!=null) {for(loaibean l: mlsl){ %>value="<%=l.getTenloai() %> <%}}%>">
 			                        </div>
 			                    </div>
 			                    <div class="text-center">
@@ -287,6 +339,27 @@
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
 			                <h1>Quản lý tác giả</h1>
 			            </div>
+			            <%
+			               	if (tb1 != null) {
+			            %>
+			              		<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Thêm tác giả thành công!</strong>
+								   </div>
+							    </div>
+					   <%}else if (tb2 != null) { %>
+					   			<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Tên tác giả đã được sửa!</strong>
+								   </div>
+							    </div>
+						<%}else if (tb3 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Xóa tác giả thành công!</strong>.
+								   </div>
+							    </div>
+						<%} %>
 			            <div class="col-md-6 mx-auto d-block">
 			                <form action="xoasuatgController" method="post">
 			                    <div class="form-row">
@@ -296,7 +369,7 @@
 			                        </div>
 			                        <div class="form-group col-md-6">
 			                            <label for="inputPassword4">Tên tác giả</label>
-			                            <input type="text" name="txtttg" class="form-control" id="inputPassword4" placeholder="Tên tác giả" <%if(mtgsl!=null){for(tacgiabean t: mtgsl) { %> value="<%= t.getTentacgia() %>" <%}} %>>
+			                            <input type="text" name="txtttg" required class="form-control" id="inputPassword4" placeholder="Tên tác giả" <%if(mtgsl!=null){for(tacgiabean t: mtgsl) { %> value="<%= t.getTentacgia() %>" <%}} %>>
 			                        </div>
 			                    </div>
 			                    <p class="font-weight-bold text-danger">* Thêm tác giả không cần nhập mã tác giả</p>
@@ -342,6 +415,33 @@
 			            <div class="col-md-12 col-lg-12 col-sm-12 text-center">
 			                <h1>Quản lý người đọc</h1>
 			            </div>
+			            <%
+			               	if (tb1 != null) {
+			            %>
+			              		<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Thêm người đọc thành công!</strong>
+								   </div>
+							    </div>
+					   <%}else if (tb2 != null) { %>
+					   			<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Thông tin người đọc đã được sửa!</strong>
+								   </div>
+							    </div>
+						<%}else if (tb3 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-success mt-2">
+								   		<strong>Xóa người đọc thành công!</strong>
+								   </div>
+							    </div>
+						<%}else if (tb4 != null){ %>
+								<div class="col-md-12 text-center">
+					               <div class="alert alert-danger mt-2">
+								   		<strong>Tài khoản đã tồn lại!</strong> Vui lòng đổi tài khoản khác.
+								   </div>
+							    </div>
+						<%} %>
 			            <div class="col-md-6 mx-auto d-block">
 			                <form action="xoasuandController" method="post">
 			                    <div class="form-group">
@@ -350,19 +450,19 @@
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="txtht">Họ tên:</label>
-		                            <input name="txtht" type="text" class="form-control mt-1" placeholder="Nhập tên người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getHoten()%>" <%}} %>>
+		                            <input name="txtht" type="text" required class="form-control mt-1" placeholder="Nhập tên người đọc"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getHoten()%>" <%}} %>>
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="txtemail">Email:</label>
-		                            <input name="txtemail" type="email" class="form-control mt-1" placeholder="Nhập email"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getEmail()%>" <%}} %>>
+		                            <input name="txtemail" type="email" required class="form-control mt-1" placeholder="Nhập email"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getEmail()%>" <%}} %>>
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="txttk">Tài khoản:</label>
-		                            <input name="txttk" type="text" class="form-control mt-1" placeholder="Nhập tên đăng nhập"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getTaikhoan()%>" <%}} %>>
+		                            <input name="txttk" type="text" required class="form-control mt-1" placeholder="Nhập tên đăng nhập"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getTaikhoan()%>" <%}} %>>
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="txtmk">Mật khẩu:</label>
-		                            <input name="txtmk" type="text" class="form-control mt-1" placeholder="Nhập mật khẩu"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getMatkhau()%>" <%}} %>>
+		                            <input name="txtmk" type="text" required class="form-control mt-1" placeholder="Nhập mật khẩu"<%if (mndsl != null) {for (nguoidocbean n : mndsl) { %> value="<%=n.getMatkhau()%>" <%}} %>>
 		                        </div>
 		                        <p class="font-weight-bold text-danger">* Thêm người đọc không cần nhập mã người đọc</p>
 			                    <div class="text-center">
@@ -382,7 +482,7 @@
 			                                <th>Email</th>
 			                                <th>Tài khoản</th>
 			                                <th>Mật khẩu đã được mã hóa</th>
-			                                <th>Sửa/Xóa</th>
+			                                <th style="min-width: 91px;">Sửa/Xóa</th>
 			                            </tr>
 			                        </thead>
 			                        <tbody>

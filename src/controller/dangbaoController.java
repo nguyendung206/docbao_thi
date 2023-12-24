@@ -95,7 +95,7 @@ public class dangbaoController extends HttpServlet {
                             break;
                         case "them":
                         	bbo.Dangbao(tieude, noidung, mota, anhbia, matg, ngay, maloai);
-                        	response.sendRedirect("htDangbaoController");
+                        	response.sendRedirect("htDangbaoController?tb=a");
                         	break;
                     }
 				}

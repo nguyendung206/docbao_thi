@@ -73,7 +73,6 @@
         </div>
         </div>
     </div>
-
     <script>
 	    const container = document.getElementById('container');
 	    const registerBtn = document.getElementById('register');

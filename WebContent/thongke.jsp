@@ -33,16 +33,17 @@
 </style>
 <body>
 	<%
+	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
 	loaibo lbo = new loaibo(); 
 	baobo bbo = new baobo();
 	tacgiabo tgbo = new tacgiabo();
-	request.setCharacterEncoding("utf-8");
-	response.setCharacterEncoding("utf-8");
 	adminbean dn = (adminbean)session.getAttribute("dn");
 	int tongBao = (int)request.getAttribute("tongBao");
 	int tongLoai = (int)request.getAttribute("tongLoai");
 	int tongNguoidoc = (int)request.getAttribute("tongNguoidoc");
 	int tongTacgia = (int)request.getAttribute("tongTacgia");
+    ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ds");
 	%>
 	<nav class="navbar navbar-expand-lg header">
     	<div class="container-fluid">
@@ -158,7 +159,6 @@
 						</div>
 	                    <div class="table-responsive">
 	                        <%
-	                            ArrayList<chitietbaobean> ds = (ArrayList<chitietbaobean>)request.getAttribute("ds");
 	                            if(ds != null && !ds.isEmpty()) { 
 	                        %>
 	                        <table class="table table-bordered" style="text-align: justify;">
@@ -192,7 +192,9 @@
 	                        <%
 	                        } else {
 	                        %>
-	                        <p>Không có dữ liệu</p>
+	                        <div class="col-md-12">
+			            		<p class="text-center" style="font-size: 20px;">Không có bài viết nào!</p>
+			            	</div>
 	                        <%} %>
 	                    </div>
 	                </div>
